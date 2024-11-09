@@ -1,12 +1,17 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 
 const StockTable = ({ stocks, searchTerm, sortConfig, onSort }) => {
     const headers = Object.keys(stocks[0] || {});
 
-    const filteredStocks = stocks.filter(stock =>
-        headers.some(header =>
-            stock[header]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-        )
+    const filteredStocks = useMemo(() => 
+        Array.isArray(stocks)
+            ? stocks.filter(stock =>
+                headers.some(header =>
+                    stock[header]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+                )
+            )
+            : [], 
+        [stocks, searchTerm, headers]
     );
 
     const sortedStocks = useMemo(() => {

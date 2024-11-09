@@ -9,9 +9,10 @@ const FilterForm = ({ onFilter, clearFilters }) => {
         const loadHeaders = async () => {
             try {
                 const headers = await fetchHeaders();
-                setAvailableFields(headers);
+                setAvailableFields(Array.isArray(headers) ? headers : []); // Ensure availableFields is an array
             } catch (error) {
                 console.error("Failed to load headers:", error);
+                setAvailableFields([]); // Set empty array on failure
             }
         };
         loadHeaders();
