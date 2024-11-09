@@ -3,26 +3,11 @@ const express = require('express');
 const cors = require('cors');
 const stockRoutes = require('./routes/stockRoutes');
 
-const corsOption = (req, res, next) => {
+const corsOptions = {
+    origin: ['https://stock-screening-tool-one.vercel.app', 'http://localhost:3000'],
+    optionsSuccessStatus: 200,
+};
 
-    const allowedOrigins = ['http://localhost:5173',"https://frontend-vogueish.vercel.app", "https://frontend-vogueish-git-main-neeldholiya04s-projects.vercel.app/", "https://frontend-vogueish-cgko6yuks-neeldholiya04s-projects.vercel.app/"]; // Add any other allowed origins
-  
-    const origin = req.headers.origin;
-    
-    if (allowedOrigins.includes(origin)) {
-      res.setHeader('Access-Control-Allow-Origin', origin);
-    }
-  
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-  
-    if (req.method === 'OPTIONS') {
-      return res.sendStatus(200);
-    }
-  
-    next();
-  };
 
 const app = express();
 app.use(cors(corsOption));
