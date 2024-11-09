@@ -10,7 +10,7 @@ const corsOptions = {
 
 
 const app = express();
-app.use(cors(corsOption));
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use('/api/stocks', stockRoutes);
